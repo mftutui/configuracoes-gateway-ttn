@@ -4,7 +4,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ## Materiais utilizados
 
-###Gateway:
+### Gateway:
 
 * Cartao SD 
 * Raspberry Pi 3 Model B V1.2 (RPi)
@@ -110,7 +110,7 @@ $ sudo visudo
 
 Adicione a linha: 
 
->> ttn ALL=(ALL) NOPASSWD: ALL
+> ttn ALL=(ALL) NOPASSWD: ALL
 
 Cuidado, isso permite que um console conectado com o usuário ttn emita quaisquer comandos no sistema, sem qualquer controle de senha.
 
@@ -134,8 +134,9 @@ Uma tela parecida com a seguinte aparecerá:
 
 O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **ff** no meio, portanto:
 
-Se: >> HWaddr: b8:27:eb:f9:ff:24
->> *Gateway* EUI: b8:27:eb:**ff**:**ff**:f9:ff:24
+Se: 
+> HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
+> *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
 
 O box *I'm using the legacy packet forwarder* deve ser marcado ao fazer a adição do *gateway* na TTN. 
 
