@@ -1,10 +1,10 @@
 # configuracoes-gateway-ttn
 
-Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando RHF0M301.
+Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando RHF0M301
 
 ## Materiais utilizados
 
-Gateway:
+###Gateway:
 
 * Cartao SD 
 * Raspberry Pi 3 Model B V1.2 (RPi)
@@ -13,14 +13,15 @@ Gateway:
 * Antena 915 MHz
 * Fonte chaveada 5V 3A
 
-![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/gateway_componentes.jpg)
+![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_componentes.jpg)
 
-Configuração do gateway:
+###Configuração do gateway:
+
 * Monitor 
 * Teclado
 * Cabo HDMI
 
-## Installing
+## Iniciando
 
 Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado pode ser seguido a partir do [link](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) que basicamente consiste em:
 
@@ -38,17 +39,17 @@ ao final você deve ter algo parecido com isso:
 
 ![Gateway montado](https://github.com/mftutui/configuracoes-gateway-ttn/gateway_montado.jpg)
 
-Conecte a RPi e o adaptador a fonte e ao cabo ethernet.
-(nao esqueça, nunca energise o módulo LoRa sem que a antena esteja conectada).
+Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (nao esqueça, nunca energise o módulo LoRa sem que a antena esteja conectada).
 
-A conexão entre a RPI e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers.
+A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers. Como pode ser visto na imagem.
 
-![Gateway montado](https://github.com/mftutui/configuracoes-gateway-ttn/gateway_caixa.jpg)
+![Gateway finalizado](
+https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
 
 Caso você esteja utilizando outro módulo LoRa, ou até mesmo uma outra placa para alimentação do módulo os pinos para a conexão entre ele e a RPi serão:
 
 Descricao      | Pino físico na RPi 
-:-------------:|:------------------
+:-------------:|:-----------------:
 Alimentacao 5V | 2
 GND            | 6
 Reset          | 22
@@ -57,16 +58,14 @@ MISO           | 21
 MOSI           | 19
 NSS            | 24
 
-Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD. Isso vai habilitar o ssh na inicialização da RPI
-
-ou você pode ligar o monitor e o teclado a RPI.
+Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD. Ou você pode ligar o monitor e o teclado a RPi.
 
 Para o acesso via ssh:
 
 ```
 local $ ssh pi@raspberrypi.local
 ```
-A senha default para o usuário pi é raspberry.
+A senha default para o usuário **pi** é **raspberry**.
 
 ## Configurações
 
@@ -78,6 +77,7 @@ Use o comando raspi-config para habilitar o [SPI](https://pt.wikipedia.org/wiki/
  $ sudo raspi-config
 ```
 [5] Interfacing options -> P4 SPI
+
 [7] Advanced options -> A1 Expand filesystem
 
 Um pedido de reboot deve surgir, confirme (ou *$ sudo reboot* para fazer manualmente).
@@ -110,7 +110,9 @@ Para evitar que o sistema solicite a senha de root regularmente adicione o usuá
 $ sudo visudo
 ```
 
-> Adicione a linha:  ttn ALL=(ALL) NOPASSWD: ALL
+Adicione a linha: 
+
+>> ttn ALL=(ALL) NOPASSWD: ALL
 
 Cuidado, isso permite que um console conectado com o usuário ttn emita quaisquer comandos no sistema, sem qualquer controle de senha.
 
@@ -123,21 +125,21 @@ $ sudo userdel -rf pi
 
 * Identificar EUI do dispositivo
 
-A identificação é bem simples, ao conectar ao terminal da RPi digite:
+Ao conectar ao terminal da RPi digite:
 ```
 $ ifconfig
 ```
 
 Uma tela parecida com a seguinte aparecerá:
 
-![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/exemplo_ifconfig.jpg)
+![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
 
 O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **ff** no meio, portanto:
 
-> HWaddr: b8:27:eb:f9:ff:24 => *Gateway* EUI: b8:27:eb:**ff**:**ff**:f9:ff:24
+Se: >> HWaddr: b8:27:eb:f9:ff:24
+>> *Gateway* EUI: b8:27:eb:**ff**:**ff**:f9:ff:24
 
 O box *I'm using the legacy packet forwarder* deve ser marcado ao fazer a adição do *gateway* na TTN. 
-
 
 * Configurações remotas
 
@@ -146,10 +148,11 @@ Os gateways TTN podem ser ajustados para permitir configuração remota. Nesse c
 Para utilizar esta opção é preciso criar um arquivo JSON com o nome da EUI no repositório [ttn-zh/gateway-remote-config](https://github.com/ttn-zh/gateway-remote-config).
 
 
-Que basicamente consiste em:
-Criar um arquivo JSON com o **EUI** do gateway em letras maiúsculas. 
+Que consiste em:
 
-> Ex: Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
+- Criar um arquivo JSON com o **EUI** do gateway em letras maiúsculas. 
+
+Ex: > Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
 
 O conteúdo do arquivo deve ser:
 ```json
@@ -173,12 +176,11 @@ O conteúdo do arquivo deve ser:
 }
 ```
 
-O arquivo deve ser adicionado (*New pull request*) ao repositório, agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
+- O arquivo deve ser adicionado (*New pull request*) ao repositório, agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
 
+* Dando sequencia as configurações:
 
-Dando sequencia as configurações:
-
-Clonar e executar os seguintes repositórios
+- Clonar e executar os seguintes repositórios
 
 ```
 $ cd /opt
@@ -193,15 +195,17 @@ cd /opt/packet_forwarder
 sudo make -j4
 ```
 
-Remova o arquivo **global_config.json** (que está em: *$ cd lora_pkt_fwd*) e crie um novo com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório.
+* Remova o arquivo **global_config.json** (que está em: *$ cd lora_pkt_fwd*) 
 
-Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*.
+* Crie um novo com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
+
+* Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
 ´´´
 $ sudo nano local_config.json
 ´´´
-Conteúdo:
-´´´json
+Conteudo:
+```json
 {
 /* Put there parameters that are different for each gateway (eg. pointing one gateway to a test server while the others stay in production) */
 /* Settings defined in global_conf will be overwritten by those in local_conf */
@@ -209,17 +213,17 @@ Conteúdo:
     "gateway_ID": "XXXXXXXXXXXXXXXX" /* you must pick a unique 64b number for each gateway (represented by an hex string) */
   }
 }
-´´´
+```
 
-* Utilização do gateway em *background*
+### Utilização do gateway em *background*
 
-Configure o *service* no *systemd*
+* Configure o *service* no *systemd*
 
 ```
 $ nano /etc/systemd/system/gateway.service
 ```
 
-Inserir o conteúdo:
+* Inserir o conteúdo:
 
 ```json
 [Unit]
@@ -245,7 +249,7 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
 
 ```
-* Conferir se o serviço está rodando
+Conferir se o serviço está rodando
 
 ```
 sudo systemctl status gateway -l
