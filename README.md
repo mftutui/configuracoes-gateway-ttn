@@ -15,7 +15,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_componentes.jpg)
 
-###Configuração do gateway:
+### Configuração do gateway:
 
 * Monitor 
 * Teclado
@@ -37,14 +37,13 @@ Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado po
 
 ao final você deve ter algo parecido com isso: 
 
-![Gateway montado](https://github.com/mftutui/configuracoes-gateway-ttn/gateway_montado.jpg)
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
 
 Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (nao esqueça, nunca energise o módulo LoRa sem que a antena esteja conectada).
 
 A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers. Como pode ser visto na imagem.
 
-![Gateway finalizado](
-https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
+![Gateway finalizado](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
 
 Caso você esteja utilizando outro módulo LoRa, ou até mesmo uma outra placa para alimentação do módulo os pinos para a conexão entre ele e a RPi serão:
 
@@ -60,8 +59,7 @@ NSS            | 24
 
 Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD. Ou você pode ligar o monitor e o teclado a RPi.
 
-Para o acesso via ssh:
-
+* Para o acesso via ssh:
 ```
 local $ ssh pi@raspberrypi.local
 ```
@@ -201,11 +199,12 @@ sudo make -j4
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
-´´´
+```
 $ sudo nano local_config.json
-´´´
+```
 Conteudo:
-```json
+
+```
 {
 /* Put there parameters that are different for each gateway (eg. pointing one gateway to a test server while the others stay in production) */
 /* Settings defined in global_conf will be overwritten by those in local_conf */
@@ -218,14 +217,12 @@ Conteudo:
 ### Utilização do gateway em *background*
 
 * Configure o *service* no *systemd*
-
 ```
 $ nano /etc/systemd/system/gateway.service
 ```
 
 * Inserir o conteúdo:
-
-```json
+```
 [Unit]
 Description=TTN Gateway Service
 After=multi-user.target
@@ -243,19 +240,13 @@ WantedBy=multi-user.target
 * Iniciar o *service*
 
 Execute as seguintes linhas para que o script do gateway rode em *background* sempre que o RPi estiver ligado:
-
 ```
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
 
 ```
-Conferir se o serviço está rodando
 
+* Conferir se o serviço está rodando
 ```
 sudo systemctl status gateway -l
 ```
-
-
-
-
-
