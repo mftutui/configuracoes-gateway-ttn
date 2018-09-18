@@ -133,6 +133,7 @@ O número destacado em vermelho é o endereço MAC da RPi e será a base para o 
 
 Se: 
 > HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
+
 > *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
 
 O box *I'm using the legacy packet forwarder* deve ser marcado ao fazer a adição do *gateway* na TTN. 
