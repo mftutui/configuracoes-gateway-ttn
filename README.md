@@ -30,11 +30,11 @@ Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado po
 
 ## Montagem
 
-* Insira o cartao SD na RPi. Encaixe o adaptador, em seguida o módulo gateway com a antena e ao final você deve ter algo parecido com isso: 
+* Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway e a antena. Ao final você deve ter algo parecido com isso: 
 
 ![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
 
-Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (nao esqueça, nunca energise o módulo LoRa sem que a antena esteja conectada).
+Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
 
 A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
 
