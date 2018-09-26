@@ -1,3 +1,293 @@
+# gateway-ttn-configuration
+
+Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thethingsnetwork.org/)
+
+- Versão em português abaixo.
+
+## Hardware
+
+### Gateway:
+
+* SD card 
+* Raspberry Pi 3 Model B V1.2 (**RPi**)
+* ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf)) LoRa Gateway
+* Gateway LoRaWAN supply adapter
+* Antenna 900MHz 6dBi Omni
+* Power supply 5V 3A
+
+![Hardware](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_componentes.jpg)
+
+### Setting up the gateway:
+
+* Monitor 
+* Keybord
+* HDMI cable
+
+## Starting
+
+First of all is necessary to prepare the SD card. You can follow the detailed step-by-step [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
+
+* Download the image
+* Upload the image into the SD card
+
+## Setting up the hardware
+
+* Insert the SD card on the RPi, connect the adapter, the gateway module and the antenna.
+
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
+
+Connect the ethernet cable to the RPi and power up (never power up the LoRa module without the antenna).
+
+The connection between the adapter and the RPi must be perfect (all the male pins connected to the females) whitout using jumpers, as can seen in the image below.
+
+![The gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
+
+> Here we use a protection box to keep the gateway on it. If you make this choice, be careful to leave the entries free.
+
+If you are using another LoRa module, or even another board to power up the module, the pins to do the connection between it and the RPi will be:
+
+Description    | RPi physical pin
+:-------------:|:-----------------:
+Supply 5V      | 2
+GND            | 6
+Reset          | 22
+SPI CLK        | 23
+MISO           | 21
+MOSI           | 19
+NSS            | 24
+
+Now you are ready to start the gateway configuration. 
+If you have access to a LAN and don't want to use a monitor and a keyboard for the settings, you will need to create a new empty file named ssh (no extension) in the SD card boot partition. Or connect the monitor and keyboard to the RPi.
+
+* To the ssh access:
+```
+local $ ssh pi@raspberrypi.local
+```
+The default password to **pi** user is **raspberry**.
+
+## Configurations
+
+### Device settings
+
+Use the raspi-config command to enable the [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) and [resize the SD card partition](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
+  
+```
+ $ sudo raspi-config
+```
+[5] Interfacing options -> P4 SPI
+
+[7] Advanced options -> A1 Expand filesystem
+
+A reboot request should come up, do it (or * $ sudo reboot * to do manually).
+
+* Configure locales and time zone 
+```
+ $ sudo dpkg-reconfigure locales
+ $ sudo dpkg-reconfigure tzdata
+```
+
+* Make sure you have an updated installation and install git:
+```
+ $ sudo apt-get update
+ $ sudo apt-get upgrade
+ $ sudo apt-get install git
+```
+ The following steps are conpletely opcional and remains your decision!!
+
+* Create new user for TTN and add it to sudoers file.
+```
+ $ sudo adduser ttn
+ $ sudo adduser ttn sudo
+```
+
+To prevent the system asking root password regularly, add TTN user in sudoers file.
+
+```
+$ sudo visudo
+```
+
+Add the line: 
+
+> ttn ALL=(ALL) NOPASSWD: ALL
+
+Beware this allows a connected console with the ttn user to issue any commands on your system, without any password control.
+
+
+* Rebbot and login as ttn. You can now remove the default pi user.
+```
+$ sudo userdel -rf pi
+```
+
+### *Gateway* set up
+
+* Identify the device EUI 
+
+Connected to the RPi terminal:
+
+```
+$ ifconfig
+```
+
+A screen like to the following will appear:
+
+![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
+
+The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. To this number we must added 2 bytes **ff** just in the midle.
+
+So: 
+> HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
+
+> *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
+
+Enable the checkbox *I'm using the legacy packet forwarder* to set the gatewat on TTN.
+
+* Remote configurations
+
+TTN gateways using this setup can be configured to allow remote configuration. In that case, the gateways checks if there's a new setting file on each start up and if so, replaces the local configuration file.
+
+To use this option you need to create an JSON file with the EUI name in [ttn-zh/gateway-remote-config](https://github.com/ttn-zh/gateway-remote-config) repository.
+
+- Create a JSON file with the **EUI** of the gateway in uppercase.
+
+e.g.: > If the gateway EUI is B827EBFFFFF9FF24, the file should be called B827EBFFFFF9FF24.json
+
+The content of the file:
+```json
+{
+  "gateway_conf": {
+    "gateway_ID": "GATEWAY_EUI",
+    "servers": [
+      {
+        "server_address": "router.us.thethings.network",
+        "serv_port_up": 1700,
+        "serv_port_down": 1700,
+        "serv_enabled": true
+      }
+    ],
+    "ref_latitude": "LATITUDE",
+    "ref_longitude": "LONGITUDE",
+    "ref_altitude": "ALTITUDE",
+    "contact_email": "EMAIL",
+    "description": "Descrption"
+  }
+}
+```
+
+- The file must be added (*New pull request*) to the repository, now just wait for it to be inserted (it should not take too long, you should receive an email with the confirmation).
+
+* Gateway settings:
+
+- Clone and execute the following repositories
+
+```
+$ cd /opt
+$ sudo git clone https://github.com/Lora-net/packet_forwarder
+$ sudo git clone https://github.com/Lora-net/lora_gateway
+```
+
+```
+cd /opt/lora_gateway
+sudo make -j4
+cd /opt/packet_forwarder
+sudo make -j4
+```
+
+* Remove the file **global_config.json** (which is in: *$ cd lora_pkt_fwd*) 
+
+* Create a new one with the content available in the ** US-global_conf.json **, file that is [here] (https://github.com/TheThingsNetwork/gateway-conf/).
+
+* Replace the **gateway_ID** in the **local_config.json** to the *gateway* EUI.
+
+```
+$ sudo nano local_config.json
+```
+Content:
+
+```
+{
+/* Put there parameters that are different for each gateway (eg. pointing one gateway to a test server while the others stay in production) */
+/* Settings defined in global_conf will be overwritten by those in local_conf */
+  "gateway_conf": {
+    "gateway_ID": "XXXXXXXXXXXXXXXX" /* you must pick a unique 64b number for each gateway (represented by an hex string) */
+  }
+}
+```
+
+### Using the gateway in *background*
+
+* Configure the *service* in the *systemd*
+```
+$ nano /etc/systemd/system/gateway.service
+```
+
+* Insert the content:
+```
+[Unit]
+Description=TTN Gateway Service
+After=multi-user.target
+[Service]
+WorkingDirectory=/opt/packet_forwarder/lora_pkt_fwd
+Type=simple
+ExecStartPre=/opt/lora_gateway/reset_lgw.sh start
+ExecStart=/opt/packet_forwarder/lora_pkt_fwd/lora_pkt_fwd
+Restart=always
+RestartSec=10
+[Install]
+WantedBy=multi-user.target
+```
+
+* Start the *service*
+
+Execute the following lines to run the script who will keep the gateway up in *background* whenever the RPi is connected: 
+```
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable gateway
+
+```
+
+* Check if the service is running
+```
+sudo systemctl status gateway -l
+```
+
+### TTN registry
+
+Now you can registry our gateway!
+
+* Assuming you already have a TTN account and you are logged, go to **Console**
+
+![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_1.png)
+
+* Go to **Gateways**
+
+[Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_2.png)
+
+* *register gateway*
+
+![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_3.png)
+
+* Enable the checkbox *I'm using the legacy packet forwarder* 
+
+![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/box.png)
+
+* Complete the remaining informations
+
+- Gateway EUI : The EUI of the gateway
+- Description: readable description of the gateway
+- Frequency Plan: The frequency plan this gateway will use
+- Router:  The closer router to the location of the gateway
+- Antenna Placement: The placement of the gateway antenna
+
+* and *Register Gateway*
+
+![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/register_ok.png)
+
+* The gateway status should be *conected*
+
+![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_ok.png)
+
+----------------------------------------------------------------------------------------------------------
+
 # configuracoes-gateway-ttn
 
 Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando RHF0M301
@@ -248,4 +538,40 @@ $ sudo systemctl enable gateway
 * Conferir se o serviço está rodando
 ```
 sudo systemctl status gateway -l
+
 ```
+### Registro na TTN
+
+Agora você pode registrar o seu gateway na TTN!
+
+* Partindo do princípio que você já possui uma conta na TTN e está logada nela vá para o **Console**
+
+![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_1.png)
+
+* Clique em **Gateways**
+
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_2.png)
+
+* *register gateway*
+
+![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_3.png)
+
+* Marque a opção *I'm using the legacy packet forwarder*
+
+![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/box.png)
+
+* Complete as informações restantes
+
+- Gateway EUI : Identidade previamente identificada
+- Description: Descrição simplificada para o seu gateway
+- Frequency Plan: Frequência utilizada pelo gateway
+- Router: O roteado mais proximo ao seu gateway
+- Antenna Placement: Onde a antena está localizada
+
+* e finalmente *Register Gateway*
+
+![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/register_ok.png)
+
+* Se tudo estiver ok, o status do gateway deve ser *conected*
+
+![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_ok.png)
