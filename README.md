@@ -252,7 +252,7 @@ sudo systemctl status gateway -l
 
 ### TTN registry
 
-Now you can registry our gateway!
+Now you can registry your gateway!
 
 * Assuming you already have a TTN account and you are logged, go to **Console**
 
