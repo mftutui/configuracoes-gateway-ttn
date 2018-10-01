@@ -25,7 +25,7 @@ Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thething
 
 ## Starting
 
-First of all is necessary to prepare the SD card. You can follow the detailed step-by-step [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
+First of all it is necessary to prepare the SD card. You can follow the detailed step-by-step [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
 * Download the image
 * Upload the image into the SD card
@@ -36,15 +36,15 @@ First of all is necessary to prepare the SD card. You can follow the detailed st
 
 ![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
 
-Connect the ethernet cable to the RPi and power up (never power up the LoRa module without the antenna).
+Connect the ethernet cable to the RPi and power up (do nor power up the LoRa module without the antenna).
 
-The connection between the adapter and the RPi must be perfect (all the male pins connected to the females) whitout using jumpers, as can seen in the image below.
+The connection between the adapter and the RPi must be perfect (all the male pins connected to the females) without using jumpers, as it can seen in the image below.
 
 ![The gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
 
-> Here we use a protection box to keep the gateway on it. If you make this choice, be careful to leave the entries free.
+> Here we use a protection box to keep the gateway protected. If you make this choice, make sure you leave the entries free.
 
-If you are using another LoRa module, or even another board to power up the module, the pins to do the connection between it and the RPi will be:
+If you are using another LoRa module, or even another board to power up the module, the pins to make the connection between it and the RPi will be:
 
 Description    | RPi physical pin
 :-------------:|:-----------------:
@@ -92,9 +92,9 @@ A reboot request should come up, do it (or * $ sudo reboot * to do manually).
  $ sudo apt-get upgrade
  $ sudo apt-get install git
 ```
- The following steps are conpletely opcional and remains your decision!!
+ The following steps are completely opcional and remains your decision!!
 
-* Create new user for TTN and add it to sudoers file.
+* Create new user for TTN and add it to *sudoers* file.
 ```
  $ sudo adduser ttn
  $ sudo adduser ttn sudo
@@ -110,7 +110,7 @@ Add the line:
 
 > ttn ALL=(ALL) NOPASSWD: ALL
 
-Beware this allows a connected console with the ttn user to issue any commands on your system, without any password control.
+Beware, this configuration allows any user to do any commands on your system, without any password control.
 
 
 * Rebbot and login as ttn. You can now remove the default pi user.
@@ -128,11 +128,11 @@ Connected to the RPi terminal:
 $ ifconfig
 ```
 
-A screen like to the following will appear:
+A screen will appear, as following:
 
 ![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
 
-The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. To this number we must added 2 bytes **ff** just in the midle.
+The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. To this number we must add 2 bytes **ff** just in the midle.
 
 So: 
 > HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
@@ -164,16 +164,16 @@ The content of the file:
         "serv_enabled": true
       }
     ],
-    "ref_latitude": "LATITUDE",
-    "ref_longitude": "LONGITUDE",
-    "ref_altitude": "ALTITUDE",
-    "contact_email": "EMAIL",
-    "description": "Descrption"
+    "ref_latitude": "latitude",
+    "ref_longitude": "longitude",
+    "ref_altitude": "altitude",
+    "contact_email": "email",
+    "description": "descrption"
   }
 }
 ```
 
-- The file must be added (*New pull request*) to the repository, now just wait for it to be inserted (it should not take too long, you should receive an email with the confirmation).
+- The file must be added (*New pull request*) to the repository. Now just wait for it to be inserted (it should not take too long, you should receive an email with the confirmation).
 
 * Gateway settings:
 
