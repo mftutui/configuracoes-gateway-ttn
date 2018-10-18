@@ -78,9 +78,9 @@ Use the raspi-config command to enable the [SPI](https://pt.wikipedia.org/wiki/S
 
 [7] Advanced options -> A1 Expand filesystem
 
-A reboot request should come up, do it (or * $ sudo reboot * to do manually).
+A reboot request should come up (or * $ sudo reboot * to do manually).
 
-* Configure locales and time zone 
+* Configure location and time zone 
 ```
  $ sudo dpkg-reconfigure locales
  $ sudo dpkg-reconfigure tzdata
@@ -92,7 +92,7 @@ A reboot request should come up, do it (or * $ sudo reboot * to do manually).
  $ sudo apt-get upgrade
  $ sudo apt-get install git
 ```
- The following steps are completely opcional and remains your decision!!
+ The following steps are completely opcional and are up to you.
 
 * Create new user for TTN and add it to *sudoers* file.
 ```
@@ -113,7 +113,7 @@ Add the line:
 Beware, this configuration allows any user to do any commands on your system, without any password control.
 
 
-* Rebbot and login as ttn. You can now remove the default pi user.
+* Reboot and login as ttn. You can now remove the default pi user.
 ```
 $ sudo userdel -rf pi
 ```
@@ -132,18 +132,18 @@ A screen will appear, as following:
 
 ![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
 
-The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. To this number we must add 2 bytes **ff** just in the midle.
+The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. For this number we must add 2 bytes **ff** just in the midle.
 
 So: 
 > HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
 
 > *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
 
-Enable the checkbox *I'm using the legacy packet forwarder* to set the gatewat on TTN.
+Enable the checkbox *"I'm using the legacy packet forwarder* to set the gatewat on TTN.
 
 * Remote configurations
 
-TTN gateways using this setup can be configured to allow remote configuration. In that case, the gateways checks if there's a new setting file on each start up and if so, replaces the local configuration file.
+TTN gateways using this setup can be set to allow remote configuration. In this case, the gateways checks if there's a new setting file and replaces the local configuration file.
 
 To use this option you need to create an JSON file with the EUI name in [ttn-zh/gateway-remote-config](https://github.com/ttn-zh/gateway-remote-config) repository.
 
@@ -238,7 +238,7 @@ WantedBy=multi-user.target
 
 * Start the *service*
 
-Execute the following lines to run the script who will keep the gateway up in *background* whenever the RPi is connected: 
+Execute the following commands to run the script that will keep the gateway up in *background* whenever the RPi is connected: 
 ```
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
@@ -252,9 +252,9 @@ sudo systemctl status gateway -l
 
 ### TTN registry
 
-Now you can registry your gateway!
+Now you can register your gateway!
 
-* Assuming you already have a TTN account and you are logged, go to **Console**
+* Assuming you already have a TTN account and you are logged in, then go to **Console**
 
 ![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_1.png)
 
@@ -270,7 +270,7 @@ Now you can registry your gateway!
 
 ![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/box.png)
 
-* Complete the remaining informations
+* Complete the remaining information
 
 - Gateway EUI : The EUI of the gateway
 - Description: readable description of the gateway
