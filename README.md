@@ -575,3 +575,5 @@ Agora você pode registrar o seu gateway na TTN!
 * Se tudo estiver ok, o status do gateway deve ser *conected*
 
 ![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_ok.png)
+
+Congrats, you rock!
