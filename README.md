@@ -242,7 +242,7 @@ Execute the following commands to run the script that will keep the gateway up i
 ```
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
-
+$ sudo systemctl start gateway
 ```
 
 * Check if the service is running
@@ -532,6 +532,7 @@ Execute as seguintes linhas para que o script do gateway rode em *background* se
 ```
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
+$ sudo systemctl start gateway
 
 ```
 
