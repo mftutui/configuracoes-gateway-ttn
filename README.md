@@ -92,7 +92,7 @@ A reboot request should come up (or * $ sudo reboot * to do manually).
  $ sudo apt-get upgrade
  $ sudo apt-get install git
 ```
- The following steps are completely opcional and are up to you.
+ The two following steps are completely opcional and are up to you.
 
 * Create new user for TTN and add it to *sudoers* file.
 ```
@@ -100,20 +100,7 @@ A reboot request should come up (or * $ sudo reboot * to do manually).
  $ sudo adduser ttn sudo
 ```
 
-To prevent the system asking root password regularly, add TTN user in sudoers file.
-
-```
-$ sudo visudo
-```
-
-Add the line: 
-
-> ttn ALL=(ALL) NOPASSWD: ALL
-
-Beware, this configuration allows any user to do any commands on your system, without any password control.
-
-
-* Reboot and login as ttn. You can now remove the default pi user.
+* Reboot and login as ttn. You can now remove the default *pi* user.
 ```
 $ sudo userdel -rf pi
 ```
@@ -186,15 +173,19 @@ $ sudo git clone https://github.com/Lora-net/lora_gateway
 ```
 
 ```
-cd /opt/lora_gateway
-sudo make -j4
-cd /opt/packet_forwarder
-sudo make -j4
+$ cd /opt/lora_gateway
+$ sudo make -j4
+$ cd /opt/packet_forwarder
+$ sudo make -j4
 ```
 
 * Remove the file **global_config.json** (which is in: *$ cd lora_pkt_fwd*) 
 
-* Create a new one with the content available in the ** US-global_conf.json **, file that is [here] (https://github.com/TheThingsNetwork/gateway-conf/).
+* Create a new one (on /opt/packet_forwarder) with the content available in the ** US-global_conf.json **, file that is [here] (https://github.com/TheThingsNetwork/gateway-conf/).
+
+```
+$ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
+```
 
 * Replace the **gateway_ID** in the **local_config.json** to the *gateway* EUI.
 
@@ -381,7 +372,7 @@ em seguida:
  $ sudo apt-get upgrade
  $ sudo apt-get install git
 ```
- As etapas a seguir são completamente opcionais e de sua decisão!!
+ As duas etapas a seguir são completamente opcionais e de sua decisão!!
 
 * Crie um novo usuário para TTN e adicione ao arquivo sudoers.
 ```
@@ -389,19 +380,8 @@ em seguida:
  $ sudo adduser ttn sudo
 ```
 
-Para evitar que o sistema solicite a senha de root regularmente adicione o usuário TTN no arquivo sudoers.
+* De um *reboot*, logue no sistema usando o usuário ttn e remova o usuário default *pi*
 
-```
-$ sudo visudo
-```
-
-Adicione a linha: 
-
-> ttn ALL=(ALL) NOPASSWD: ALL
-
-Cuidado, isso permite que um console conectado com o usuário ttn emita quaisquer comandos no sistema, sem qualquer controle de senha.
-
-* De um *reboot* e logue no sistema usando o usuário ttn e remova o usuário default pi 
 ```
 $ sudo userdel -rf pi
 ```
@@ -422,7 +402,7 @@ Uma tela parecida com a seguinte aparecerá:
 O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **ff** no meio, portanto:
 
 Se: 
-> HWaddr: b 8 : 2 7 : e b : f 9 : f f : 2 4
+>  b 8 : 2 7 : e b : f 9 : f f : 2 4
 
 > *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
 
@@ -476,15 +456,23 @@ $ sudo git clone https://github.com/Lora-net/lora_gateway
 ```
 
 ```
-cd /opt/lora_gateway
-sudo make -j4
-cd /opt/packet_forwarder
-sudo make -j4
+$ cd /opt/lora_gateway
+$ sudo make -j4
+$ cd /opt/packet_forwarder
+$ sudo make -j4
 ```
 
 * Remova o arquivo **global_config.json** (que está em: *$ cd lora_pkt_fwd*) 
 
-* Crie um novo com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
+```
+$ sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
+```
+
+* Crie um novo (em /opt/packet_forwarder/lora_pkt_fwd/) com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
+
+```
+$ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
+```
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
