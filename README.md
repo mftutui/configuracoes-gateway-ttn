@@ -181,7 +181,7 @@ $ sudo make -j4
 
 * Remove the file **global_config.json** (which is in: *$ cd lora_pkt_fwd*) 
 
-* Create a new one (on /opt/packet_forwarder) with the content available in the **US-global_conf.json**, file that is [here] (https://github.com/TheThingsNetwork/gateway-conf/).
+* Create a new one (on /opt/packet_forwarder) with the content available in the **US-global_conf.json**, file that is [here](https://github.com/TheThingsNetwork/gateway-conf/).
 
 ```
 $ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
