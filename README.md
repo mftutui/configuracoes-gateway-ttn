@@ -10,7 +10,7 @@ Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thething
 
 * [SD card](https://www.raspberrypi.org/documentation/installation/sd-cards.md)
 * Raspberry Pi 3 Model B V1.2 (**RPi**)
-* [RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf) LoRa Gateway
+* LoRa Gateway ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf))
 * Gateway LoRaWAN supply adapter
 * Antenna 900MHz 6dBi Omni
 * Power supply 5V 3A
