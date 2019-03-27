@@ -23,6 +23,10 @@ Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thething
 * Keybord
 * HDMI cable
 
+### Access to:
+* [GitHub](https://github.com/)
+* [The Things Network](https://www.thethingsnetwork.org/)
+
 ## Starting
 
 First of all it is necessary to prepare the SD card. You can follow the detailed step-by-step [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
@@ -306,6 +310,10 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Teclado
 * Cabo HDMI
 
+### Acesso a:
+* [GitHub](https://github.com/)
+* [The Things Network](https://www.thethingsnetwork.org/)
+
 ## Iniciando
 
 Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado pode ser seguido a partir do [link](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) que basicamente consiste em:
@@ -327,7 +335,7 @@ A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser p
 
 > Aqui utilizamos uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas livres.
 
-Caso você esteja utilizando outro módulo LoRa, ou até mesmo uma outra placa para alimentação do módulo os pinos para a conexão entre ele e a RPi serão:
+Caso você esteja utilizando outro módulo LoRa, ou até mesmo outro modo de alimentação para o módulo os pinos para a conexão entre ele e a RPi serão:
 
 Descricao      | Pino físico na RPi 
 :-------------:|:-----------------:
@@ -339,36 +347,39 @@ MISO           | 21
 MOSI           | 19
 NSS            | 24
 
-Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD. Ou você pode ligar o monitor e o teclado a RPi.
+Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário habilitar uma conexão SSH. Para isso basta criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD, qualquer dúvida é só dar uma olhada [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/)(tópico 3). Você pode também ligar o monitor e o teclado a RPi, e então liberar a conexão via SSH [(tópico 2)](https://www.raspberrypi.org/documentation/remote-access/ssh/).
 
-* Para o acesso via ssh:
+* Para o acesso via ssh, caso em uma rede LAN com o arquivo ssh na partição inicial:
 ```
-local $ ssh pi@raspberrypi.local
+$ ssh pi@raspberrypi.local
 ```
+
+* Para o acesso via ssh, após a liberação feita pela RPi:
+```
+$ ssh pi@IP
+```
+
 A senha default para o usuário **pi** é **raspberry**.
 
 ## Configurações
 
 ### Configurações do dispositivo
 
-Use o comando raspi-config para habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
-  
+Use o comando raspi-config para configurar local, timezone, habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
 ```
  $ sudo raspi-config
 ```
+[4] Localization Options -> I1 Change Locale
+
+[4] Localization Options -> I2 Change Timezone
+
 [5] Interfacing options -> P4 SPI
 
 [7] Advanced options -> A1 Expand filesystem
 
-Um pedido de reboot deve surgir, confirme (ou *$ sudo reboot* para fazer manualmente).
+Ao sair, um pedido de reboot deve surgir, confirme (ou *$ sudo reboot* para fazer manualmente).
 
 em seguida:
-
-* Configure o local e time zone 
-```
- $ sudo dpkg-reconfigure locales
- $ sudo dpkg-reconfigure tzdata
-```
 
 * Atualize o sistema e instale o git:
 ```
@@ -376,16 +387,16 @@ em seguida:
  $ sudo apt-get upgrade
  $ sudo apt-get install git
 ```
- As duas etapas a seguir são completamente opcionais e de sua decisão!!
 
-* Crie um novo usuário para TTN e adicione ao arquivo sudoers.
+ A etapa a seguir é completamente opcional e de sua decisão!!
+
+* Crie um novo usuário para TTN.
 ```
  $ sudo adduser ttn
  $ sudo adduser ttn sudo
 ```
 
-* De um *reboot*, logue no sistema usando o usuário ttn e remova o usuário default *pi*
-
+* De um *reboot*, logue no sistema usando o usuário *ttn* e remova o usuário default *pi*
 ```
 $ sudo userdel -rf pi
 ```
@@ -410,14 +421,12 @@ Se:
 
 > *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
 
-O box *I'm using the legacy packet forwarder* deve ser marcado ao fazer a adição do *gateway* na TTN. 
 
 * Configurações remotas
 
 Os gateways TTN podem ser ajustados para permitir configuração remota. Nesse caso, é verificado se há um novo arquivo de configuração em cada inicialização do dispositivo e, caso haja, o arquivo de configuração local é substituido.
 
 Para utilizar esta opção é preciso criar um arquivo JSON com o nome da EUI no repositório [ttn-zh/gateway-remote-config](https://github.com/ttn-zh/gateway-remote-config).
-
 
 Que consiste em:
 
