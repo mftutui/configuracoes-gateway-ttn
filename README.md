@@ -295,7 +295,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ### Gateway:
 
-* [Cartão SD](https://www.raspberrypi.org/documentation/installation/sd-cards.md))  
+* [Cartão SD](https://www.raspberrypi.org/documentation/installation/sd-cards.md)  
 * Raspberry Pi 3 Model B V1.2 (**RPi**)
 * Módulo Gateway LoRaWAN ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf)) RISINGHF 
 * Adaptador para módulo Gateway LoRaWAN
