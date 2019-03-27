@@ -347,7 +347,7 @@ MISO           | 21
 MOSI           | 19
 NSS            | 24
 
-Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário habilitar uma conexão SSH. Para isso basta criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD, qualquer dúvida é só dar uma olhada [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/)(tópico 3). Você pode também ligar o monitor e o teclado a RPi, e então liberar a conexão via SSH [(tópico 2)](https://www.raspberrypi.org/documentation/remote-access/ssh/).
+Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário habilitar uma conexão SSH. Para isso basta criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD, qualquer dúvida é só dar uma olhada [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/) (tópico 3). Você pode também ligar o monitor e o teclado a RPi, e então liberar a conexão via SSH [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/) (tópico 2).
 
 * Para o acesso via ssh, caso em uma rede LAN com o arquivo ssh na partição inicial:
 ```
@@ -362,6 +362,8 @@ $ ssh pi@IP
 A senha default para o usuário **pi** é **raspberry**.
 
 ## Configurações
+
+Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as proximas instruções. Essa conexão pode ser feita via cabo ou usando o [Wi-fi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md).
 
 ### Configurações do dispositivo
 
@@ -432,7 +434,7 @@ Que consiste em:
 
 - Criar um arquivo JSON com o **EUI** do gateway em letras maiúsculas. 
 
-Ex: > Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
+> Ex: Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
 
 O conteúdo do arquivo deve ser:
 ```json
@@ -484,14 +486,18 @@ $ sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
 * Crie um novo (em /opt/packet_forwarder/lora_pkt_fwd/) com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
 
 ```
+$ cd /opt/packet_forwarder/lora_pkt_fwd/
 $ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
 ```
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
 ```
-$ sudo nano local_config.json
+$ sudo nano local_conf.json
 ```
+
+> Fique a vontade para usar o editor de texto que preferir
+
 Conteudo:
 
 ```
@@ -506,12 +512,12 @@ Conteudo:
 
 ### Utilização do gateway em *background*
 
-* Configure o *service* no *systemd*
+* Configure o *service* no *systemd* criando o arquivo *gateway.service*
 ```
 $ nano /etc/systemd/system/gateway.service
 ```
 
-* Inserir o conteúdo:
+* Inserir o conteúdo em *gateway.service*:
 ```
 [Unit]
 Description=TTN Gateway Service
@@ -529,19 +535,18 @@ WantedBy=multi-user.target
 
 * Iniciar o *service*
 
-Execute as seguintes linhas para que o script do gateway rode em *background* sempre que o RPi estiver ligado:
+Execute as seguintes linhas para que o script do gateway rode em *background* sempre que o RPi for inicializado:
 ```
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
 $ sudo systemctl start gateway
-
 ```
 
 * Conferir se o serviço está rodando
 ```
 sudo systemctl status gateway -l
-
 ```
+
 ### Registro na TTN
 
 Agora você pode registrar o seu gateway na TTN!
