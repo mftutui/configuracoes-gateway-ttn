@@ -2,7 +2,7 @@
 
 Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thethingsnetwork.org/)
 
-- Versão em português abaixo.
+[Versão em português](#configuracoes-gateway-ttn)
 
 ## Hardware
 
