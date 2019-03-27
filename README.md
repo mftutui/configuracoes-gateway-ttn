@@ -432,7 +432,11 @@ Para utilizar esta opção é preciso criar um arquivo JSON com o nome da EUI no
 
 Que consiste em:
 
-- Criar um arquivo JSON com o **EUI** do gateway em letras maiúsculas. 
+- Criar um arquivo JSON com o **EUI** do gateway em letras maiúsculas, contendo as informações sobre o mesmo. 
+
+- O arquivo deve ser adicionado usando *Create new file*:
+
+![Create new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_new_file.png)
 
 > Ex: Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
 
@@ -458,7 +462,15 @@ O conteúdo do arquivo deve ser:
 }
 ```
 
-- O arquivo deve ser adicionado (*New pull request*) ao repositório, agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
+- Propor a adição do arquivo:
+
+![Propose new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/propose_new_file.png)
+
+![Create pull request1](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_pull_request1.png)
+
+![Create pull request2](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_pull_request2.png)
+
+Agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
 
 * Dando sequencia as configurações:
 
