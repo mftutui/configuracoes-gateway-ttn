@@ -44,7 +44,7 @@ Connect the ethernet cable to the RPi and power up (do nor power up the LoRa mod
 
 The connection between the adapter and the RPi must be perfect (all the male pins connected to the females) without using jumpers, as it can seen in the image below.
 
-![The gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
+![The gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_caixa.jpg)
 
 > Here we use a protection box to keep the gateway protected. If you make this choice, make sure you leave the entries free.
 
@@ -121,7 +121,7 @@ $ ifconfig
 
 A screen will appear, as following:
 
-![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
+![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/exemplo_ifconfig.png)
 
 The highlighted number is the RPi MAC address, and will be the base to our *Gateway* **EUI**. For this number we must add 2 bytes **ff** just in the midle.
 
@@ -255,19 +255,19 @@ Now you can register your gateway!
 
 * Assuming you already have a TTN account and you are logged in, then go to **Console**
 
-![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_1.png)
+![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_1.png)
 
 * Go to **Gateways**
 
-[Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_2.png)
+[Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_2.png)
 
 * *register gateway*
 
-![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_3.png)
+![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_3.png)
 
 * Enable the checkbox *I'm using the legacy packet forwarder* 
 
-![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/box.png)
+![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/box.png)
 
 * Complete the remaining information
 
@@ -279,11 +279,11 @@ Now you can register your gateway!
 
 * and *Register Gateway*
 
-![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/register_ok.png)
+![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/register_ok.png)
 
 * The gateway status should be *conected*
 
-![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_ok.png)
+![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_ok.png)
 
 ----------------------------------------------------------------------------------------------------------
 
@@ -302,7 +302,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Antena 915 MHz
 * Fonte chaveada 5V 3A
 
-![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_componentes.jpg)
+![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_componentes.jpg)
 
 ### Configuração do gateway:
 
@@ -325,13 +325,13 @@ Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado po
 
 * Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway e a antena. Ao final você deve ter algo parecido com isso: 
 
-![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_montado.jpg)
 
 Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
 
 A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
 
-![Gateway finalizado](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_caixa.jpg)
+![Gateway finalizado](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_caixa.jpg)
 
 > Aqui utilizamos uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas livres.
 
@@ -414,7 +414,7 @@ $ ifconfig
 
 Uma tela parecida com a seguinte aparecerá:
 
-![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/exemplo_ifconfig.png)
+![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/exemplo_ifconfig.png)
 
 O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **ff** no meio, portanto:
 
@@ -436,7 +436,7 @@ Que consiste em:
 
 - O arquivo deve ser adicionado usando *Create new file*:
 
-![Create new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_new_file.png)
+![Create new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_new_file.png)
 
 > Ex: Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
 
@@ -464,11 +464,11 @@ O conteúdo do arquivo deve ser:
 
 - Propor a adição do arquivo:
 
-![Propose new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/propose_new_file.png)
+![Propose new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/propose_new_file.png)
 
-![Create pull request1](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_pull_request1.png)
+![Create pull request1](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_pull_request1.png)
 
-![Create pull request2](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/create_pull_request2.png)
+![Create pull request2](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_pull_request2.png)
 
 Agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
 
@@ -565,19 +565,19 @@ Agora você pode registrar o seu gateway na TTN!
 
 * Partindo do princípio que você já possui uma conta na TTN e está logada nela vá para o **Console**
 
-![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_1.png)
+![Console](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_1.png)
 
 * Clique em **Gateways**
 
-![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_2.png)
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_2.png)
 
 * *register gateway*
 
-![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/console_3.png)
+![registrar_gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/console_3.png)
 
 * Marque a opção *I'm using the legacy packet forwarder*
 
-![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/box.png)
+![box](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/box.png)
 
 * Complete as informações restantes
 
@@ -589,8 +589,8 @@ Agora você pode registrar o seu gateway na TTN!
 
 * e finalmente *Register Gateway*
 
-![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/register_ok.png)
+![register](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/register_ok.png)
 
 * Se tudo estiver ok, o status do gateway deve ser *conected*
 
-![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_ok.png)
+![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_ok.png)
