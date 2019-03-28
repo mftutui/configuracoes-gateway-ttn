@@ -15,7 +15,7 @@ Gateway LoRa configuration guide based on RHF0M301 on [TTN](https://www.thething
 * Antenna 900MHz 6dBi Omni
 * Power supply 5V 3A
 
-![Hardware](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_componentes.jpg)
+![Hardware](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_componentes.jpg)
 
 ### Setting up the gateway:
 
