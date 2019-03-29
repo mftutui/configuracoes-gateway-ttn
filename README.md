@@ -224,7 +224,7 @@ sudo nano local_conf.json
 
 Conteudo:
 
-```json
+```
 {
 /* Put there parameters that are different for each gateway (eg. pointing one gateway to a test server while the others stay in production) */
 /* Settings defined in global_conf will be overwritten by those in local_conf */
@@ -242,7 +242,7 @@ nano /etc/systemd/system/gateway.service
 ```
 
 * Inserir o conteúdo em *gateway.service*:
-```json
+```
 [Unit]
 Description=TTN Gateway Service
 After=multi-user.target
