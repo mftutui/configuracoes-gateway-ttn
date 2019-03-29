@@ -2,7 +2,7 @@
 
 Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301
 
-[English version 🇺🇸] (https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
+[English version 🇺🇸](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
 
 ### Importante:
 📗 Leia o material todo antes de começar.
@@ -67,7 +67,7 @@ NSS            | 24
 
 Agora está tudo pronto para a configuração do gateway.
 
-Existem algumas opções para acessar o gateway, você pode escolher uma delas 
+Existem algumas opções para acessar o terminal do gateway, você pode escolher uma delas 
 [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/). 
 
  - A senha default para o usuário **pi** é **raspberry**.
@@ -79,7 +79,7 @@ Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as p
 ### Configurações do dispositivo
 
 Já com o acesso ao terminal da RPi use o comando raspi-config para configurar local, timezone, habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
-```
+```sh
  $ sudo raspi-config
 ```
 
@@ -96,7 +96,7 @@ Ao sair, um pedido de reboot deve surgir, confirme (ou *$ sudo reboot* para faze
 em seguida:
 
 * Atualize o sistema e instale o git:
-```
+```sh
  $ sudo apt-get update
  $ sudo apt-get upgrade
  $ sudo apt-get install git
@@ -105,13 +105,13 @@ em seguida:
  A etapa a seguir é completamente opcional e de sua decisão!!
 
 * Crie um novo usuário para TTN.
-```
+```sh
  $ sudo adduser ttn
  $ sudo adduser ttn sudo
 ```
 
 * De um *reboot*, logue no sistema usando o usuário *ttn* e remova o usuário default *pi*
-```
+```sh
 $ sudo userdel -rf pi
 ```
 
@@ -120,7 +120,7 @@ $ sudo userdel -rf pi
 * Identificar EUI do dispositivo
 
 Ao conectar ao terminal da RPi digite:
-```
+```sh
 $ ifconfig
 ```
 
@@ -188,13 +188,13 @@ Agora é só esperar ele ser inserido (não deve demorar muito, você deve receb
 
 - Clonar e executar os seguintes repositórios
 
-```
+```sh
 $ cd /opt
 $ sudo git clone https://github.com/Lora-net/packet_forwarder
 $ sudo git clone https://github.com/Lora-net/lora_gateway
 ```
 
-```
+```sh
 $ cd /opt/lora_gateway
 $ sudo make -j4
 $ cd /opt/packet_forwarder
@@ -203,20 +203,20 @@ $ sudo make -j4
 
 * Remova o arquivo **global_config.json** (que está em: *$ cd lora_pkt_fwd*) 
 
-```
+```sh
 $ sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
 ```
 
 * Crie um novo (em /opt/packet_forwarder/lora_pkt_fwd/) com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
 
-```
+```sh
 $ cd /opt/packet_forwarder/lora_pkt_fwd/
 $ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
 ```
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
-```
+```sh
 $ sudo nano local_conf.json
 ```
 
@@ -224,7 +224,7 @@ $ sudo nano local_conf.json
 
 Conteudo:
 
-```
+```json
 {
 /* Put there parameters that are different for each gateway (eg. pointing one gateway to a test server while the others stay in production) */
 /* Settings defined in global_conf will be overwritten by those in local_conf */
@@ -237,12 +237,12 @@ Conteudo:
 ### Utilização do gateway em *background*
 
 * Configure o *service* no *systemd* criando o arquivo *gateway.service*
-```
+```sh
 $ nano /etc/systemd/system/gateway.service
 ```
 
 * Inserir o conteúdo em *gateway.service*:
-```
+```json
 [Unit]
 Description=TTN Gateway Service
 After=multi-user.target
@@ -260,14 +260,14 @@ WantedBy=multi-user.target
 * Iniciar o *service*
 
 Execute as seguintes linhas para que o script do gateway rode em *background* sempre que o RPi for inicializado:
-```
+```sh
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable gateway
 $ sudo systemctl start gateway
 ```
 
 * Conferir se o serviço está rodando
-```
+```sh
 sudo systemctl status gateway -l
 ```
 
