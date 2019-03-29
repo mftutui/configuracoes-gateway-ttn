@@ -1,12 +1,19 @@
 # configuracoes-gateway-ttn
 
-Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando RHF0M301
+Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301
+
+[English version 🇺🇸] (https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
+
+### Importante:
+📗 Leia o material todo antes de começar.
+
+☺️ Caso encontre algum erro, tenha alguma sugestão ou dúvida fique a vontade para entrar em contato.
 
 ## Materiais utilizados
 
 ### Gateway:
 
-* [Cartão SD](https://www.raspberrypi.org/documentation/installation/sd-cards.md)  
+* Cartão SD [(especificações)](https://www.raspberrypi.org/documentation/installation/sd-cards.md)  
 * Raspberry Pi 3 Model B V1.2 (**RPi**)
 * Módulo Gateway LoRaWAN ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf)) RISINGHF 
 * Adaptador para módulo Gateway LoRaWAN
@@ -27,7 +34,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ## Iniciando
 
-Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado pode ser seguido a partir do [link](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) que basicamente consiste em:
+Primeiramente é necessário preparar o cartão SD. O passo a passo detalhado pode ser seguido a partir do [link](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) e consiste em:
 
 * Download da imagem
 * Escrita da imagem no cartão
@@ -40,13 +47,13 @@ Antes de tudo é necessário preparar o cartão SD. O passo a passo detalhado po
 
 Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
 
-A conexão entre a RPi e o adaptador e entre o adaptador e o módulo devem ser perfeitas (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
+A conexão entre a RPi e o adaptador e entre o adaptador e o módulo, usando essa placa adaptadora acontece de forma perfeita (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
 
 ![Gateway finalizado](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_caixa.jpg)
 
-> Aqui utilizamos uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas livres.
+> Aqui, utilizamos uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas da RPi livres.
 
-Caso você esteja utilizando outro módulo LoRa, ou até mesmo outro modo de alimentação para o módulo os pinos para a conexão entre ele e a RPi serão:
+Caso você esteja utilizando outro modo de alimentação para o módulo os pinos para a conexão entre ele e a RPi serão:
 
 Descricao      | Pino físico na RPi 
 :-------------:|:-----------------:
@@ -58,30 +65,24 @@ MISO           | 21
 MOSI           | 19
 NSS            | 24
 
-Agora está tudo pronto para a configuração do gateway. Caso você tenha acesso a uma rede LAN e não queira utilizar um monitor e um teclado para as configurações é necessário habilitar uma conexão SSH. Para isso basta criar um novo arquivo vazio chamado ssh (sem extensão) na partição de inicialização do cartão SD, qualquer dúvida é só dar uma olhada [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/) (tópico 3). Você pode também ligar o monitor e o teclado a RPi, e então liberar a conexão via SSH [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/) (tópico 2).
+Agora está tudo pronto para a configuração do gateway.
 
-* Para o acesso via ssh, caso em uma rede LAN com o arquivo ssh na partição inicial:
-```
-$ ssh pi@raspberrypi.local
-```
+Existem algumas opções para acessar o gateway, você pode escolher uma delas 
+[aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/). 
 
-* Para o acesso via ssh, após a liberação feita pela RPi:
-```
-$ ssh pi@IP
-```
-
-A senha default para o usuário **pi** é **raspberry**.
+ - A senha default para o usuário **pi** é **raspberry**.
 
 ## Configurações
 
-Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as proximas instruções. Essa conexão pode ser feita via cabo ou usando o [Wi-fi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md).
+Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as proximas instruções. Essa conexão pode ser feita via cabo ou usando o [Wi-Fi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md).
 
 ### Configurações do dispositivo
 
-Use o comando raspi-config para configurar local, timezone, habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
+Já com o acesso ao terminal da RPi use o comando raspi-config para configurar local, timezone, habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
 ```
  $ sudo raspi-config
 ```
+
 [4] Localization Options -> I1 Change Locale
 
 [4] Localization Options -> I2 Change Timezone
@@ -127,12 +128,12 @@ Uma tela parecida com a seguinte aparecerá:
 
 ![ifconfig - EUI](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/exemplo_ifconfig.png)
 
-O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **ff** no meio, portanto:
+O número destacado em vermelho é o endereço MAC da RPi e será a base para o *Gateway* **EUI**. A este número devem ser adicionados 2 bytes **F F** no meio, portanto:
 
-Se: 
->  b 8 : 2 7 : e b : f 9 : f f : 2 4
 
-> *Gateway* EUI: b 8 : 2 7 : e b : **f** **f** : **f** **f** : f 9 : f f : 2 4
+|    HWaddr   |       b 8 : 2 7 : e b : f 9 : f f : 2 4       |
+|:-----------:|:---------------------------------------------:|
+| **Gateway EUI** | **b 8 : 2 7 : e b : F F : FF : f 9 : f f : 2 4** |
 
 
 * Configurações remotas
@@ -149,7 +150,7 @@ Que consiste em:
 
 ![Create new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_new_file.png)
 
-> Ex: Se o gateway EUI for B827EBFFFFF9FF24, o arquivo deverá ser chamado B827EBFFFFF9FF24.json
+> Ex: Se o gateway EUI for **B827EBFFFFF9FF24**, o arquivo deverá ser chamado **B827EBFFFFF9FF24.json**
 
 O conteúdo do arquivo deve ser:
 ```json
@@ -305,3 +306,5 @@ Agora você pode registrar o seu gateway na TTN!
 * Se tudo estiver ok, o status do gateway deve ser *conected*
 
 ![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_ok.png)
+
+* Caso o gateway não esteja conectado tente reiniciá-lo, sempre funciona!
