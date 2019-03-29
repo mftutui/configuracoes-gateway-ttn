@@ -16,6 +16,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ### Sumário
 1. [Materiais utilizados](#Materiais-utilizados)
+	1. [Gateway](#Gateway)
 2. [Iniciando](#Iniciando)
 3. [Montagem](#Montagem)
 4. [Configurações](#Configurações)
@@ -23,7 +24,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ## Materiais utilizados
 
-### Gateway:
+### Gateway
 
 * Cartão SD [(especificações)](https://www.raspberrypi.org/documentation/installation/sd-cards.md)  
 * Raspberry Pi 3 Model B V1.2 (**RPi**)
@@ -34,7 +35,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_componentes.jpg)
 
-### Configuração do gateway:
+### Configuração do gateway
 
 * Monitor 
 * Teclado
