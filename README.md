@@ -4,15 +4,22 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 [English version 🇺🇸](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
 
-### Importante:
+### Importante
 📗 Leia o material todo antes de começar.
 
 ☺️ Caso encontre algum erro, tenha alguma sugestão ou dúvida fique a vontade para entrar em contato.
 
-### Requisitos:
+### Requisitos
 * Conhecimento básico em Linux
 * Acesso ao [GitHub](https://github.com/)
 * Acesso em [The Things Network](https://www.thethingsnetwork.org/)
+
+### Sumário
+1. [Materiais utilizados](## Materiais utilizados)
+2. [Iniciando](## Iniciando)
+3. [Montagem](## Montagem)
+4. [Configurações](## Configurações)
+5. [Registro na TTN](## Registro na TTN)
 
 ## Materiais utilizados
 
@@ -280,7 +287,7 @@ sudo systemctl start gateway
 sudo systemctl status gateway -l
 ```
 
-### Registro na TTN
+## Registro na TTN
 
 Agora você pode registrar o seu gateway na TTN!
 
