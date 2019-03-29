@@ -9,6 +9,11 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 ☺️ Caso encontre algum erro, tenha alguma sugestão ou dúvida fique a vontade para entrar em contato.
 
+### Requisitos:
+* Conhecimento básico em Linux
+* Acesso ao [GitHub](https://github.com/)
+* Acesso em [The Things Network](https://www.thethingsnetwork.org/)
+
 ## Materiais utilizados
 
 ### Gateway:
@@ -27,10 +32,6 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Monitor 
 * Teclado
 * Cabo HDMI
-
-### Acesso a:
-* [GitHub](https://github.com/)
-* [The Things Network](https://www.thethingsnetwork.org/)
 
 ## Iniciando
 
