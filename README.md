@@ -1,13 +1,13 @@
 # configuracoes-gateway-ttn
 
-Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301
+Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301.
 
 [English version 🇺🇸](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
 
 ### Importante
-📗 Leia o material todo antes de começar.
+📗 Leia o material todo antes de começar
 
-☺️ Caso encontre algum erro, tenha alguma sugestão ou dúvida fique a vontade para entrar em contato.
+☺️ Caso encontre algum erro, tenha alguma sugestão ou dúvida fique a vontade para entrar em contato
 
 ### Requisitos
 * Conhecimento básico em Linux
