@@ -80,7 +80,7 @@ Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as p
 
 Já com o acesso ao terminal da RPi use o comando raspi-config para configurar local, timezone, habilitar o [SPI](https://pt.wikipedia.org/wiki/Serial_Peripheral_Interface) e [redimensionar a partição do cartão SD](https://jeffersonpalheta.wordpress.com/2017/09/25/redimensionar-particao-sd-card-raspberry-pi-raspbian-jessie/).
 ```sh
- $ sudo raspi-config
+sudo raspi-config
 ```
 
 [4] Localization Options -> I1 Change Locale
@@ -97,22 +97,22 @@ em seguida:
 
 * Atualize o sistema e instale o git:
 ```sh
- $ sudo apt-get update
- $ sudo apt-get upgrade
- $ sudo apt-get install git
+ sudo apt-get update
+ sudo apt-get upgrade
+ sudo apt-get install git
 ```
 
  A etapa a seguir é completamente opcional e de sua decisão!!
 
 * Crie um novo usuário para TTN.
 ```sh
- $ sudo adduser ttn
- $ sudo adduser ttn sudo
+ sudo adduser ttn
+ sudo adduser ttn sudo
 ```
 
 * De um *reboot*, logue no sistema usando o usuário *ttn* e remova o usuário default *pi*
 ```sh
-$ sudo userdel -rf pi
+sudo userdel -rf pi
 ```
 
 ### Configurações do *gateway*
@@ -121,7 +121,7 @@ $ sudo userdel -rf pi
 
 Ao conectar ao terminal da RPi digite:
 ```sh
-$ ifconfig
+ifconfig
 ```
 
 Uma tela parecida com a seguinte aparecerá:
@@ -189,35 +189,35 @@ Agora é só esperar ele ser inserido (não deve demorar muito, você deve receb
 - Clonar e executar os seguintes repositórios
 
 ```sh
-$ cd /opt
-$ sudo git clone https://github.com/Lora-net/packet_forwarder
-$ sudo git clone https://github.com/Lora-net/lora_gateway
+cd /opt
+sudo git clone https://github.com/Lora-net/packet_forwarder
+sudo git clone https://github.com/Lora-net/lora_gateway
 ```
 
 ```sh
-$ cd /opt/lora_gateway
-$ sudo make -j4
-$ cd /opt/packet_forwarder
-$ sudo make -j4
+cd /opt/lora_gateway
+sudo make -j4
+cd /opt/packet_forwarder
+sudo make -j4
 ```
 
 * Remova o arquivo **global_config.json** (que está em: *$ cd lora_pkt_fwd*) 
 
 ```sh
-$ sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
+sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
 ```
 
 * Crie um novo (em /opt/packet_forwarder/lora_pkt_fwd/) com o conteúdo disponibilizado no arquivo **US-global_conf.json** que se encontra [neste](https://github.com/TheThingsNetwork/gateway-conf/) repositório
 
 ```sh
-$ cd /opt/packet_forwarder/lora_pkt_fwd/
-$ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
+cd /opt/packet_forwarder/lora_pkt_fwd/
+sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
 ```
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
 ```sh
-$ sudo nano local_conf.json
+sudo nano local_conf.json
 ```
 
 > Fique a vontade para usar o editor de texto que preferir
@@ -238,7 +238,7 @@ Conteudo:
 
 * Configure o *service* no *systemd* criando o arquivo *gateway.service*
 ```sh
-$ nano /etc/systemd/system/gateway.service
+nano /etc/systemd/system/gateway.service
 ```
 
 * Inserir o conteúdo em *gateway.service*:
@@ -261,9 +261,9 @@ WantedBy=multi-user.target
 
 Execute as seguintes linhas para que o script do gateway rode em *background* sempre que o RPi for inicializado:
 ```sh
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable gateway
-$ sudo systemctl start gateway
+sudo systemctl daemon-reload
+sudo systemctl enable gateway
+sudo systemctl start gateway
 ```
 
 * Conferir se o serviço está rodando
