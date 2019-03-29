@@ -15,11 +15,11 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Acesso em [The Things Network](https://www.thethingsnetwork.org/)
 
 ### Sumário
-1. [Materiais utilizados](##-Materiais-utilizados)
-2. [Iniciando](##-Iniciando)
-3. [Montagem](##-Montagem)
-4. [Configurações](##-Configurações)
-5. [Registro na TTN](##-Registro-na-TTN)
+1. [Materiais utilizados](#-Materiais-utilizados)
+2. [Iniciando](#-Iniciando)
+3. [Montagem](#-Montagem)
+4. [Configurações](#-Configurações)
+5. [Registro na TTN](#-Registro-na-TTN)
 
 ## Materiais utilizados
 
