@@ -328,3 +328,5 @@ Agora você pode registrar o seu gateway na TTN!
 ![connected](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_ok.png)
 
 * Caso o gateway não esteja conectado tente reiniciá-lo, sempre funciona!
+
+> [Tutorial](https://github.com/mftutui/ttn-first-steps) para o desenvolvimento de uma aplicação para uso na TTN usando The Things UNO
