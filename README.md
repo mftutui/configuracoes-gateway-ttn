@@ -152,6 +152,10 @@ Que consiste em:
 
 > Ex: Se o gateway EUI for **B827EBFFFFF9FF24**, o arquivo deverá ser chamado **B827EBFFFFF9FF24.json**
 
+Os campos *gateway_ID*, *server_address*, *contact_email* e *description* são strings, devem conter aspas (""). 
+
+Já os campos referentes a latitude, longitude e altitude são apenas números, não levam aspas.
+
 O conteúdo do arquivo deve ser:
 ```json
 {
@@ -178,11 +182,15 @@ O conteúdo do arquivo deve ser:
 
 ![Propose new file](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/propose_new_file.png)
 
+- Crie um *pull request*:
+
 ![Create pull request1](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_pull_request1.png)
+
+- Confirme:
 
 ![Create pull request2](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/create_pull_request2.png)
 
-Agora é só esperar ele ser inserido (não deve demorar muito, você deve receber um email com a confirmação).
+Agora é só esperar ele ser inserido (não deve demorar muito caso os dados estejam coerentes, você deve receber um email com a confirmação).
 
 * Dando sequencia as configurações:
 
