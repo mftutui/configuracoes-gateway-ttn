@@ -231,7 +231,7 @@ sudo rm -rf /opt/packet_forwarder/lora_pkt_fwd/global_config.json
 
 ```sh
 cd /opt/packet_forwarder/lora_pkt_fwd/
-sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/EU-global_conf.json
+sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork/gateway-conf/master/US-global_conf.json
 ```
 
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
