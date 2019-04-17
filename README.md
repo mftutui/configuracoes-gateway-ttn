@@ -48,7 +48,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 Primeiramente é necessário preparar o cartão SD. O passo a passo detalhado pode ser seguido a partir do [link](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) e consiste em:
 
-* Download da imagem
+* Download da imagem (no caso, Raspbian Stretch Lite)
 * Escrita da imagem no cartão
 
 ## Montagem
