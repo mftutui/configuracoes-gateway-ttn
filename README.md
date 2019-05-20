@@ -237,7 +237,7 @@ sudo curl -o global_conf.json https://raw.githubusercontent.com/TheThingsNetwork
 * Substitua o **gateway_ID** no arquivo **local_config.json** pelo EUI do *gateway*
 
 ```sh
-sudo nano local_conf.json
+sudo nano /opt/packet_forwarder/lora_pkt_fwd/local_conf.json
 ```
 
 > Fique a vontade para usar o editor de texto que preferir
