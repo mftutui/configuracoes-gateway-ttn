@@ -4,13 +4,6 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 
 [English version 🇺🇸](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
 
-
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
-
-
-
 ### Importante
 📗 Leia o material todo antes de começar
 
