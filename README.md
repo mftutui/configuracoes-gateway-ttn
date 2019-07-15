@@ -258,7 +258,7 @@ Conteudo:
 
 * Configure o *service* no *systemd* criando o arquivo *gateway.service*
 ```sh
-nano /etc/systemd/system/gateway.service
+sudo nano /etc/systemd/system/gateway.service
 ```
 
 * Inserir o conteúdo em *gateway.service*:
