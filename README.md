@@ -1,8 +1,8 @@
 # configuracoes-gateway-ttn
 
-Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301 RISINGHF .
+Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org/) utilizando módulo RHF0M301 RISINGHF.
 
-[English version 🇺🇸](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
+[English version](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/README-en.md)
 
 ### Importante
 📗 Leia o material todo antes de começar.
@@ -32,7 +32,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Cartão SD [(especificações)](https://www.raspberrypi.org/documentation/installation/sd-cards.md)  
 * Raspberry Pi 3 Model B V1.2 (**RPi**)
 * Módulo Gateway LoRaWAN ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf)) RISINGHF 
-* Adaptador para módulo Gateway LoRaWAN
+* Adaptador para módulo RHF0M301 RISINGHF Gateway LoRaWAN
 * Antena 915 MHz
 * 2 fontes chaveadas 5V 3A
 
@@ -53,19 +53,19 @@ Primeiramente é necessário preparar o cartão SD. O passo a passo detalhado po
 
 ## Montagem
 
-* Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway, a antena alimente ambas as placas. Ao final você deve ter algo parecido com isso: 
+* Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway e a antena. Ao final você deve ter algo parecido com isso: 
 
 ![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_montado.jpg)
 
-Conecte a RPi e o adaptador a fonte e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
+Conecte a RPi e o adaptador às fontes e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
 
-A conexão entre a RPi e o adaptador e entre o adaptador e o módulo, usando essa placa adaptadora acontece de forma perfeita (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
+A conexão entre a RPi e o adaptador e entre o adaptador e o módulo, usando a placa adaptadora para módulo RHF0M301 RISINGHF o encaixe acontece de forma perfeita (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
 
 ![Gateway finalizado](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_caixa.jpg)
 
-> Aqui, utilizamos uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas da RPi livres.
+> Nessa montagem foi utilizada uma caixa protetora para abrigar o gateway. Se fizer esta escolha tome cuidado para sempre deixar as entradas da RPi livres.
 
-Caso você esteja utilizando outro modo de alimentação para o módulo os pinos para a conexão entre ele e a RPi serão:
+Caso você esteja utilizando outro modo de alimentação para o módulo LoRaWAN os pinos para a conexão entre ele e a RPi serão:
 
 Descricao      | Pino físico na RPi 
 :-------------:|:-----------------:
@@ -79,14 +79,13 @@ NSS            | 24
 
 Agora está tudo pronto para a configuração do gateway.
 
-Existem algumas opções para acessar o terminal do gateway, você pode escolher uma delas 
-[aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/). 
+Existem algumas opções para acessar o terminal do gateway, você pode escolher uma delas [aqui](https://www.raspberrypi.org/documentation/remote-access/ssh/). 
 
  - A senha default para o usuário **pi** é **raspberry**.
 
 ## Configurações
 
-Vale lembrar que o dispositivo deve estar conectado à Internet para seguir as proximas instruções. Essa conexão pode ser feita via cabo ou usando o [Wi-Fi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md).
+Vale lembrar que o dispositivo deve estar conectado à Internet para realizar as proximas instruções. Essa conexão pode ser feita via cabo ou usando o [Wi-Fi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md).
 
 ### Configurações do dispositivo
 
