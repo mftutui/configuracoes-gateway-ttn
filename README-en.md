@@ -38,7 +38,7 @@ First of all it is necessary to prepare the SD card. You can follow the detailed
 
 * Insert the SD card on the RPi, connect the adapter, the gateway module and the antenna.
 
-![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/gateway_montado.jpg)
+![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_montado.jpg)
 
 Connect the ethernet cable to the RPi and power up (do nor power up the LoRa module without the antenna).
 
