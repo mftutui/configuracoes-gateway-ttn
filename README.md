@@ -34,7 +34,7 @@ Guia de configuração de Gateway LoRa na [TTN](https://www.thethingsnetwork.org
 * Módulo Gateway LoRaWAN ([RHF0M301](https://www.robotshop.com/media/files/pdf/915mhz-lora-gateway-raspberry-pi-hat-datasheet1.pdf)) RISINGHF 
 * Adaptador para módulo Gateway LoRaWAN
 * Antena 915 MHz
-* Fonte chaveada 5V 3A
+* 2 fontes chaveadas 5V 3A
 
 ![Materiais](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_componentes.jpg)
 
@@ -53,7 +53,7 @@ Primeiramente é necessário preparar o cartão SD. O passo a passo detalhado po
 
 ## Montagem
 
-* Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway e a antena. Ao final você deve ter algo parecido com isso: 
+* Insira o cartao SD na RPi. Encaixe o adaptador, o módulo gateway, a antena alimente ambas as placas. Ao final você deve ter algo parecido com isso: 
 
 ![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_montado.jpg)
 
