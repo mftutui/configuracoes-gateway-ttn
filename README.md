@@ -57,7 +57,7 @@ Primeiramente é necessário preparar o cartão SD. O passo a passo detalhado po
 
 ![Gateway](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/gateway_montado.jpg)
 
-Conecte a RPi e o adaptador às fontes e ao cabo Ethernet (não energise o módulo LoRa sem que a antena esteja conectada).
+Conecte a RPi e o adaptador às fontes e ao cabo Ethernet (não energize o módulo LoRa sem que a antena esteja conectada).
 
 A conexão entre a RPi e o adaptador e entre o adaptador e o módulo, usando a placa adaptadora para módulo RHF0M301 RISINGHF o encaixe acontece de forma perfeita (todos os pinos machos conectados aos fêmeas) sem a necessidade da utilização de jumpers, como pode ser visto na imagem.
 
