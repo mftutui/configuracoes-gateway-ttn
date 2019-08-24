@@ -1,6 +1,6 @@
 # configuracoes-gateway-ttn
 
-![logo](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/logo.jpg)
+![logo](https://github.com/mftutui/configuracoes-gateway-ttn/blob/master/images/logo.png)
 
 Este tutorial foi produzido pelo **Instituto Federal de Santa Catarina (IFSC)** - Campus São José, juntamente com a **Fundação de Amparo à Pesquisa e Inovação do Estado de Santa Catarina (FAPESC)** a partir do projeto de pesquisa aplicada por meio do edital de chamada pública FAPESC - Nº 05/2017.
 
