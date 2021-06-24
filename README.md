@@ -98,13 +98,13 @@ Já com o acesso ao terminal da RPi use o comando raspi-config para configurar l
 sudo raspi-config
 ```
 
-[4] Localization Options -> I1 Change Locale
+Localization Options -> I1 Change Locale
 
-[4] Localization Options -> I2 Change Timezone
+Localization Options -> I2 Change Timezone
 
-[5] Interfacing options -> P4 SPI
+Interfacing options -> P4 SPI
 
-[7] Advanced options -> A1 Expand filesystem
+Advanced options -> A1 Expand filesystem
 
 Ao sair, um pedido de reboot deve surgir, confirme (ou *$ sudo reboot* para fazer manualmente).
 
@@ -292,6 +292,16 @@ sudo systemctl start gateway
 * Conferir se o serviço está rodando
 ```sh
 sudo systemctl status gateway -l
+```
+* Possível problema em versões mais novas do Raspbian:
+```sh
+lora_pkt_fwd[638]: ERROR: Failed to load fw 1
+lora_pkt_fwd[638]: ERROR: Version of calibration firmware not expected, actual:0 expected:2
+lora_pkt_fwd[638]: ERROR: [main] failed to start the concentrator
+```
+Isso ocorre porque o novo kernel Linux bloqueia o GPIO07 por ser utilizado pelo SPI. Solução: adicione a linha abaixo ao final do arquivo /boot/config.txt, supondo que o pino GPIO04 está livre em sua placa. Senão, substitua '4' pelo número de qualquer outro GPIO não utilizado.
+```
+dtoverlay=spi0-cs,cs1_pin=4
 ```
 
 ## Registro na TTN
